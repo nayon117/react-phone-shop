@@ -1,31 +1,10 @@
-import PropTypes from "prop-types";
-import swal from "sweetalert";
-const PhoneCard = ({ phone }) => {
-  
-  const { id, image, phone_name, brand_name } = phone || {};
+ 
+import PropTypes from 'prop-types';
 
-  const handleAddToFavorits = () => {
-    const addedFavoriteArray = [];
-    const favoritesItems = JSON.parse(localStorage.getItem("favorits"));
-    if (!favoritesItems) {
-      addedFavoriteArray.push(phone);
-      localStorage.setItem("favorits", JSON.stringify(addedFavoriteArray));
-      swal("Good job!", "product added successfuly!", "success");
-    } else {
-      const isExist = favoritesItems.find((phone) => phone.id === id);
-      if (!isExist) {
-        addedFavoriteArray.push(...favoritesItems, phone);
-        localStorage.setItem("favorits", JSON.stringify(addedFavoriteArray));
-        swal("Good job!", "product added successfuly!", "success");
-      }
-      else {
-        swal("Error!", "Already Added!", "error");
-      }
-    }
-  };
-
-  return (
-    <div className="flex justify-center items-center h-[80vh]">
+const FavoritesCard = ({ phone }) => {
+    const {image,brand_name,phone_name, } = phone || {}
+    return (
+        <div className="flex justify-center items-center  ">
       <div className="relative flex w-full max-w-[48rem] flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
         <div className="relative m-0 w-2/5 shrink-0 overflow-hidden rounded-xl rounded-r-none bg-white bg-clip-border text-gray-700">
           <img src={image} alt="image" className="h-full w-full object-cover" />
@@ -40,7 +19,7 @@ const PhoneCard = ({ phone }) => {
 
           <a className="inline-block" href="#">
             <button
-              onClick={handleAddToFavorits}
+              
               className="flex select-none items-center gap-2 rounded-lg py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-pink-500 transition-all hover:bg-pink-500/10 active:bg-pink-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button"
             >
@@ -65,10 +44,11 @@ const PhoneCard = ({ phone }) => {
         </div>
       </div>
     </div>
-  );
+    );
 };
 
-PhoneCard.propTypes = {
-  phone: PropTypes.object,
+FavoritesCard.propTypes = {
+    phone:PropTypes.object
 };
-export default PhoneCard;
+
+export default FavoritesCard;
